@@ -82,6 +82,10 @@
   onPegsChanged={handlePegsChanged}
 />
 
+<footer class="codehawks-footer">
+  A <a href="https://www.codehawks.co.uk" target="_blank" rel="noopener noreferrer">CodeHawks</a> project
+</footer>
+
 <Controls
   {mode}
   {scale}
@@ -103,5 +107,21 @@
     height: 100vh;
     height: 100dvh;
     overflow: hidden;
+  }
+  .codehawks-footer {
+    position: fixed;
+    bottom: 0.25rem;
+    right: 0.5rem;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    pointer-events: auto;
+    z-index: 20;
+  }
+  .codehawks-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .codehawks-footer a:hover {
+    text-decoration: underline;
   }
 </style>
