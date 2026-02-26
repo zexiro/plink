@@ -2,9 +2,11 @@
   import Header from './components/Header.svelte';
   import Canvas from './components/Canvas.svelte';
   import Controls from './components/Controls.svelte';
+  import About from './components/About.svelte';
   import { PRESETS, generateRandom, encodeBoard, decodeBoard, materializeBoard } from './lib/board.js';
   import { SCALES } from './lib/scales.js';
 
+  let view = $state('play');
   let mode = $state('play');
   let scale = $state('pentatonic');
   let gravity = $state(1);
@@ -61,6 +63,7 @@
   }
 </script>
 
+{#if view === 'play'}
 <Header
   {mode}
   onModeChange={(m) => mode = m}
@@ -83,7 +86,7 @@
 />
 
 <footer class="codehawks-footer">
-  A <a href="https://www.codehawks.co.uk" target="_blank" rel="noopener noreferrer">CodeHawks</a> project
+  <button class="about-link" onclick={() => view = 'about'}>About</button> · A <a href="https://www.codehawks.co.uk" target="_blank" rel="noopener noreferrer">CodeHawks</a> project
 </footer>
 
 <Controls
@@ -99,6 +102,9 @@
   {pegType}
   onPegTypeChange={(t) => pegType = t}
 />
+{:else if view === 'about'}
+<About onClose={() => view = 'play'} />
+{/if}
 
 <style>
   :global(#app) {
@@ -122,6 +128,18 @@
     text-decoration: none;
   }
   .codehawks-footer a:hover {
+    text-decoration: underline;
+  }
+  .about-link {
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  .about-link:hover {
     text-decoration: underline;
   }
 </style>
